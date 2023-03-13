@@ -4,8 +4,6 @@ function explodePrtcl($id){
 	$id = explode(".", $id[0]);
 	return @$id['3'];
   }
-
-
 	include_once("../classes_principais/sql.php");
 	include_once("../classes_principais/fileArq.php");
 	include_once("selecionarDados.php");
@@ -99,4 +97,30 @@ echo $msg =  "<span  class='alert alert-warning alert-dismissible fade show col-
 	}
 
 
+
+
+	if(!is_null($_POST['cad_event'])){
+		$link = "MQ==";
+		$nmpgn = "SU7DjUNJTw0K";
+		var_dump($_POST['cad_event']);		
+		echo $idusr = $_POST['idusr']; echo '<br>';
+		echo $nmevnt = $_POST['tip_event']; echo '<br>';
+		echo $local_event = $_POST['local_event']; echo '<br>';
+		
+		echo $stts_evento = $_POST['stts_evento']; echo '<br>';
+		echo $dtevnt = $_POST['dt_event']; echo '<br>';
+		echo $dscevrnt = $_POST['desc_event']; echo '<br>';
+		echo $hr_inicio = $_POST['hr_inicio']; echo '<br>';
+		echo $hr_fim = $_POST['hr_fim']; echo '<br>';	
+		
+		
+		
+			$criaPagina = NEW SQL;
+			$criaPagina->setTabela("`tbl_eventos`");
+			$criaPagina->setColunas("`id_evento`, `fk_iduser`, `nm_evento`,`local_event`, `dt_evento`, `hr_evnt_inc`, `hr_evnt_fim`, `desc_evento`, `stts_evento`, `dt_registro`");	
+			$criaPagina->setValues("null,'".$idusr."','".$nmevnt."','".$local_event."','".$dtevnt."','".$hr_inicio."','".$hr_fim."','".$dscevrnt."','".$stts_evento."',current_timestamp()");	
+			$criaPagina->insert();
+		echo	$msg =  "  <span class='alert alert-success alert-dismissible fade show col-12'> REGISTRADO COM SUCESSO </span> ";
+				@header("Location: ../../?link=".$link."&nmpgn=".$nmpgn."&msg=".base64_encode($msg));
+		}
 ?>

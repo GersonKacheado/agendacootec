@@ -11,7 +11,7 @@ if (base64_decode(@$_REQUEST['v'])=="emmanuelDiasPEREIRA_PROTOCOLOdpe" && base64
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>nomedosistema</title>
+  <title>AGENDA COOTEC</title>
   <link rel="stylesheet" href="tmpt/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="tmpt/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="tmpt/dist/css/adminlte.min.css">
@@ -29,9 +29,9 @@ if (base64_decode(@$_REQUEST['v'])=="emmanuelDiasPEREIRA_PROTOCOLOdpe" && base64
                 
                 <div class="row">
                   
-                  <div class="col-md-4" style="background-color:#33AE91">
+                  <div class="col-md-4" style="background-color:#338F46">
                   <div class="content-header">
-<p> <h3 class="text-center text-white"> <strong> nomedosistema</strong> </h3></p>
+<p> <h3 class="text-center text-white"> <strong> AGENDA COOTEC</strong> </h3></p>
                 </div>
                   <div class="text-center ">
                   <img class="img-fluid" src="tmpt/dist/img/T_logo.png" alt="User profile picture">
@@ -78,7 +78,7 @@ if (base64_decode(@$_REQUEST['v'])=="emmanuelDiasPEREIRA_PROTOCOLOdpe" && base64
                   
                   <div class="col-md-8">
                     <img class="img-fluid"
-                       src="tmpt/dist/img/login_missao.jpg"
+                       src="tmpt/dist/img/cootec.jpeg"
                        alt="User profile picture">
                        
                   </div>

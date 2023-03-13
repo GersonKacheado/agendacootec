@@ -6,7 +6,7 @@ $img = $objSlct->getimg();
     <a href='#' class='brand-link'>
       <img src='<?php echo "tmpt/dist/img/0.jpg" ;?>' alt='Logodosistema' class='brand-image img-circle elevation-3'
            style='opacity: .8'>
-      <span class='brand-text font-weight-light text-uppercase'>nomedosistema</span>
+      <span class='brand-text font-weight-light text-uppercase'>AGENDA COOTEC</span>
     </a>    
     <div class='sidebar'>     
       <div class='info text-sm'>            
@@ -15,7 +15,7 @@ $img = $objSlct->getimg();
            style='opacity: .8'>
       <span class='brand-text font-weight-light text-uppercase'><?php echo ucfirst(USERNMADM) ?></span>
     </a>
-        <a href='#' class='d-block'>nomedosetor</a>
+        <a href='#' class='d-block invisible'>nomedosetor</a>
     </div>
       <nav class='mt-2'>
         <ul class='nav nav-pills nav-sidebar flex-column' data-widget='treeview' role='menu' data-accordion='false'>

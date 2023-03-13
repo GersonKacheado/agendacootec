@@ -12,7 +12,7 @@
 			$this->passwd = 'Root@1234';
 			$this->banco = 'mysql';
 			$this->porta = '3306';
-			$this->dbnome = 'logldap';
+			$this->dbnome = 'agendacootec';
 			$this->dsn = $this->banco.":host=".$this->host.";port=".$this->porta.";dbname=".$this->dbnome.";charset=utf8";
 			self::conn();
 		}

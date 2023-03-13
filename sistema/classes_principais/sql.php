@@ -41,7 +41,7 @@ class SQL extends CONN
 
 	function alterar()
 	{
-		$this->sql = "UPDATE $this->tabela SET $this->valuestbl WHERE $this->id_dados = $this->id_values";
+		echo $this->sql = "UPDATE $this->tabela SET $this->valuestbl WHERE $this->id_dados = $this->id_values";
 		if (self::execute($this->sql)) {$this->msg =  true;
 		}
 	}

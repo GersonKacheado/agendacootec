@@ -487,7 +487,7 @@ $objSlct = NEW SELECIONARDADOS;
     <form method="post" action="sistema/controller/inserirDados.php" class="" enctype="multipart/form-data">
     <div class="form-group">
       <label for="exampleInputEmail1">nome link</label>
-      <input type="text" name="nmlinkPagina" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="text" name="nmlinkPagina" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='pg_***_**'>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">

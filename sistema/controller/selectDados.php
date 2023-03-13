@@ -72,18 +72,25 @@ $resultado->pages
 }
 
 
-
+/**gerencia de paginas */
 function listPaginas(){
-  $sql = "SELECT * FROM `tbl_paginas` WHERE `status` = 0 ORDER BY `tbl_paginas`.`id_pgns` ASC";
+  $sql = "SELECT * FROM `tbl_paginas` WHERE `hbltd` = 0 ORDER BY `tbl_paginas`.`id_pgns` ASC";
 self::execute($sql);
 while($resultado = $this->stmt->fetch(PDO::FETCH_OBJ)){
+  $sttsPagina = '';
+if($resultado->hbltd == 1){
+  $sttsPagina = '<p class="text-danger"><strong>desabilitado</strong></p>';
+}else{
+  $sttsPagina = '<p class="text-success"><strong>habilitado</strong></p>'; 
+}
+
   echo " 
   <tr>
   <td>$resultado->id_pgns</td>
   <td>$resultado->nm_link</td>
   <td>$resultado->nm_pgn</td>
   <td>$resultado->nm_icon</td>
-  <td>$resultado->hbltd</td>
+  <td>$sttsPagina</td>
   <td>$resultado->sub_menu</td>
   <td> <a class='btn btn-outline-warning elevation-1 btn-sm m-1' title='EDITAR REGISTRO' data-toggle='modal' data-target='.bd-example-modal-lg".$resultado->id_pgns."'>EDITAR</a>
   <a type='button' class='btn btn-outline-danger elevation-1 btn-sm' title='APAGAR REGISTRO' data-toggle='modal' data-target='.bd-example-modal-sm".$resultado->id_pgns."'>EXCLUIR</a>
@@ -297,6 +304,131 @@ function selectBuscAltUser(){
         ";
       }
     }
+
+    function listAcoesDpe(){
+      $sql = "SELECT * FROM `VIEW_SEL_REGIST_EVENT` ORDER BY `id_evento`  DESC";
+      self::execute($sql);
+      while($resultado = $this->stmt->fetch(PDO::FETCH_OBJ)){
+        $stts_evnt = '';
+        if($resultado->stts_evento == 1){
+          $stts_evnt = '<span class="badge badge-success">Realizado</span>';
+            }else if($resultado->stts_evento == 0){
+                  $stts_evnt = '<span class="badge badge-warning">Espera</span>'; 
+                      }elseif($resultado->stts_evento == 2){
+                        $stts_evnt = '<span class="badge badge-info">Adiado</span>';
+                          }else{
+                            $stts_evnt = '<span class="badge badge-danger">Cancelado</span>';
+                          }
+
+        echo "
+            <tr>                
+            <td><small>$resultado->id_evento</small> $stts_evnt</td>            
+            <td><a><small> $resultado->nm_evento </small></a><br/>
+            <small>$resultado->hr_evnt_inc às $resultado->hr_evnt_fim</small></td>
+            <td><small><u>$resultado->local_event</u></small><br/>
+            <small>$resultado->dt_evento</small></td>
+            <td><small>$resultado->desc_evento</small></td>
+            <td> <a class='badge badge-default' title='EDITAR REGISTRO' data-toggle='modal' data-target='.bd-example-modal-lg".$resultado->id_evento."'><u><i class='fas fa-pen'></i>editar</u></a></td>
+            </tr>           
+            <div class='modal fade bd-example-modal-lg".$resultado->id_evento."' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-lg'>
+              <div class='modal-content'>
+              <div class='card text-left'>
+              <div class='card-header'>
+                ATUALIZAR INFORMAÇÕES DO EVENTO
+              </div>            
+              <div class='card-body'>
+              <form method='POST' action='sistema/controller/atualizarDados.php'>
+              <input type='hidden' name='id_evento' class='form-control' id='inputPassword' value='".$resultado->id_evento."' >
+
+              <div class='form-row'>
+              <div class='form-group col-md-6 text-uppercase'>
+                <label for='inputEmail4'>TIPO EVENTO</label>
+                <select class='form-control form-control-sm' name='tip_event' id='inlineFormCustomSelectPref' required>
+                <option value='$resultado->nm_evento'>$resultado->nm_evento</option>
+                <option value='ação carreta'>AÇÃO CARRETA</option>
+                <option value='inauguração'>INAUGURAÇÃO</option>    
+              </select>
+              </div>
+              <div class='form-group col-md-6'>
+                <label for='inputPassword4'>LOCALIDADE</label>
+                <select class='form-control form-control-sm' name='local_event' id='inlineFormCustomSelectPref' required>
+                <option value='$resultado->local_event'>$resultado->local_event</option>
+                <option value='MACAPÁ'>MACAPÁ</option>
+                <option value='SANTANA'>SANTANA</option>
+                <option value='LARANJAL DO JARI'>LARANJAL DO JARI</option>
+                <option value='OIAPOQUE'>OIAPOQUE</option>
+                <option value='PORTO GRANDE'>PORTO GRANDE</option>
+                <option value='MAZAGÃO'>MAZAGÃO</option>
+                <option value='TARTARUGALZINHO'>TARTARUGALZINHO</option>
+                <option value='PEDRA BRANCA DO AMAPARI'>PEDRA BRANCA DO AMAPARI</option>
+                <option value='VITÓRIA DO JARI'>VITÓRIA DO JARI</option>
+                <option value='CALÇOENE'>CALÇOENE</option>
+                <option value='AMAPÁ'>AMAPÁ</option>
+                <option value='FERREIRA GOMES'>FERREIRA GOMES</option>
+                <option value='CUTIAS DO ARAGUARY'>CUTIAS DO ARAGUARY</option>
+                <option value='ITAUBAL'>ITAUBAL</option>
+                <option value='SERRA DO NAVIO'>SERRA DO NAVIO</option>
+                <option value='PRACUÚBA'>PRACUÚBA</option>   
+              </select>    
+              </div>
+              </div>
+              <div class='form-group'>
+              <label for='inputAddress2'>DATA DO EVENTO</label>
+              <input type='date' name='dt_event' class='form-control form-control-sm' id='inputAddress2' placeholder='' required>
+              <span><small>Data Prevista: $resultado->dt_evento</small></span>
+              </div>
+              <div class='form-row'>
+              <div class='form-group col-md-5'>
+              <label for='inputAddress2'>HORA INÍCIO</label>
+              <input type='time' name='hr_inicio' class='form-control form-control-sm' id='inputAddress2' placeholder='' required>
+              <span><small>Horario Início: $resultado->hr_evnt_inc</small></span>
+
+              </div>
+              <div class='form-group col-md-5'>
+              <label for='inputAddress2'>HORA FIM</label>
+              <input type='time' name='hr_fim' class='form-control form-control-sm' id='inputAddress2' placeholder='' required>
+              <span><small>Horario Termino: $resultado->hr_evnt_fim</small></span>
+              </div>
+              <div class='form-group col-md-2'>
+              <label for='inputAddress2'>STATUS</label>
+              <select class='form-control form-control-sm' name='stts_evento' id='inlineFormCustomSelectPref' required>
+              <option value='$resultado->stts_evento'>$stts_evnt</option>
+              <option value='0'>EM ESPERA</option>
+              <option value='1'>REALIZADO</option>    
+              <option value='2'>ADIADO</option>    
+              <option value='4'>CANCELADO</option>    
+            </select>
+              <span><small>Status: $stts_evnt</small></span>
+              </div>
+              </div>
+              <div class='form-group'>
+              <label for='inputAddress'>OBSERVAÇÃO</label>
+              <textarea class='form-control form-control-sm' name='desc_event' id='' cols='30' rows='3' required></textarea>
+              <span><small>Observações Gerais: $resultado->desc_evento</small></span>
+
+              </div>    
+              <button type='submit' name='upcad_event' class='btn btn-success'>ATUALIZAR INFORMAÇÕES</button>
+              <button type='reset' class='btn btn-secondary ml-2'>LIMPAR CAMPOS</button>
+              <button type='button' class='btn btn-danger' data-dismiss='modal'>FECHAR</button>
+              </form>
+              </div>
+              <div class='card-footer text-muted'>
+              <small>Dados Registrados por <strong>$resultado->nm_usr</strong> em <strong>$resultado->dt_registro</strong></small>
+              </div>
+            </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          
+           
+        ";
+      }
+    }
+
+
+
   } ?>
 
 

@@ -67,4 +67,24 @@ $updtPagina->alterar();
 $msg =  " <span class='alert alert-success alert-dismissible fade show col-12'> DADOS DA PAGINA REMOVIDOS COM SUCESSO </span> ";
  @header("Location: ../../?link=".$link."&nmpgn=".$nmpgn."&msg=".base64_encode($msg));
 }
+if (isset($_POST['upcad_event'])) {
+	$link = "MQ==";
+	$nmpgn = "SU7DjUNJTw0K";
+	echo $id_evento = $_POST['id_evento']; echo '<br>';
+	echo $nmevnt = $_POST['tip_event']; echo '<br>';
+	echo $local_event = $_POST['local_event']; echo '<br>';	
+	echo $dtevnt = $_POST['dt_event']; echo '<br>';
+	echo $dscevrnt = $_POST['desc_event']; echo '<br>';
+	echo $hr_inicio = $_POST['hr_inicio']; echo '<br>';
+	echo $hr_fim = $_POST['hr_fim']; echo '<br>';	
+	echo $stts_evento = $_POST['stts_evento']; echo '<br>';	
+$upEvent = NEW SQL;
+$upEvent->setTabela("`tbl_eventos`");
+$upEvent->setValuesTbl("`id_evento`= '".$id_evento."',`nm_evento`= '".$nmevnt."',`local_event`= '".$local_event."', `dt_evento`= '".$dtevnt."', `hr_evnt_inc`='".$hr_inicio."', `hr_evnt_fim`='".$hr_fim."', `desc_evento`='".$dscevrnt."', `stts_evento`='".$stts_evento."'");
+$upEvent->setIdDados("`id_evento`");
+$upEvent->setIdValues("$id_evento");
+$upEvent->alterar();
+$msg =  " <span class='alert alert-success alert-dismissible fade show col-12'> DADOS ATUALIZADOS COM SUCESSO </span> ";
+ @header("Location: ../../?link=".$link."&nmpgn=".$nmpgn."&msg=".base64_encode($msg));
+}
 ?>
